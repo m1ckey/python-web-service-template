@@ -1,0 +1,11 @@
+gcp:
+  project_id:
+
+db:
+  host:
+  port:
+  user:
+  database:
+
+server:
+  port: 80

@@ -1,0 +1,10 @@
+scalar Base64
+scalar DateTime
+
+type Query {
+    ping: String!
+}
+
+type Mutation {
+    hello(name: String!): String!
+}

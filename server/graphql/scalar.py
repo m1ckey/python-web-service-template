@@ -4,7 +4,7 @@ from uuid import UUID
 
 from ariadne import ScalarType
 
-base64 = ScalarType('Base64', serializer=lambda x: b64encode(x), value_parser=lambda x: b64decode(x))
+base64 = ScalarType('Base64', serializer=lambda x: b64encode(x).decode(), value_parser=lambda x: b64decode(x))
 dt = ScalarType('DateTime', serializer=lambda x: x.isoformat(x), value_parser=lambda x: datetime.fromisoformat(x))
 uuid = ScalarType('UUID', serializer=lambda x: str(x), value_parser=lambda x: UUID(x))
 

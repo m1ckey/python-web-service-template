@@ -31,9 +31,9 @@ class JWTAuth(AuthenticationBackend):
             raise AuthenticationError('illegal auth')
 
         user_id = payload['sub']
-        return AuthCredentials([Scope.USER.name]), SimpleUser(user_id)
+        return AuthCredentials([Scope.ADMIN.name]), SimpleUser(user_id)
 
 
 def require_scope(request: Request, scope: Scope):
     if scope.name not in request.auth.scopes:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, f'requires "{scope.INSTALLED_APP.name}" scope')
+        raise HTTPException(status.HTTP_403_FORBIDDEN, f'requires "{scope.ADMIN.name}" scope')

@@ -36,4 +36,4 @@ class JWTAuth(AuthenticationBackend):
 
 def require_scope(request: Request, scope: AuthScope):
     if scope.name not in request.auth.scopes:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, f'requires "{scope.ADMIN.name}" scope')
+        raise HTTPException(status.HTTP_403_FORBIDDEN, f'requires "{scope.name}" scope')

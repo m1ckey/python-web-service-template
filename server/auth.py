@@ -10,7 +10,7 @@ from starlette.requests import Request
 from config import conf
 
 
-class Scope(Enum):
+class AuthScope(Enum):
     ADMIN = 1
 
 
@@ -31,9 +31,9 @@ class JWTAuth(AuthenticationBackend):
             raise AuthenticationError('illegal auth')
 
         user_id = payload['sub']
-        return AuthCredentials([Scope.ADMIN.name]), SimpleUser(user_id)
+        return AuthCredentials([AuthScope.ADMIN.name]), SimpleUser(user_id)
 
 
-def require_scope(request: Request, scope: Scope):
+def require_scope(request: Request, scope: AuthScope):
     if scope.name not in request.auth.scopes:
         raise HTTPException(status.HTTP_403_FORBIDDEN, f'requires "{scope.ADMIN.name}" scope')

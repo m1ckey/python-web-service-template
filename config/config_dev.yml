@@ -6,6 +6,3 @@ db:
   port:
   user:
   database:
-
-server:
-  port: 8000

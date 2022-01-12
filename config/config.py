@@ -59,8 +59,6 @@ class Config:
                 self.db_port = conf['db']['port']
                 self.db_user = conf['db']['user']
                 self.db_database = conf['db']['database']
-
-                self.server_port = conf['server']['port']
             except KeyError as e:
                 self.logger.critical(f'could not parse {path}: {e}')
                 exit(1)

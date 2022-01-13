@@ -1,0 +1,19 @@
+# todo: replace <REPO NAME>, <IMAGE NAME>, <REGION>
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', '<REGION>-docker.pkg.dev/$PROJECT_ID/<REPO NAME>/<IMAGE NAME>:latest', '.' ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', '<REGION>-docker.pkg.dev/$PROJECT_ID/<REPO NAME>/<IMAGE NAME>:latest' ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'core'
+      - '--image'
+      - '<REGION>-docker.pkg.dev/$PROJECT_ID/<REPO NAME>/<IMAGE NAME>:latest'
+      - '--region'
+      - '<REGION>'
+images:
+  - '<REGION>-docker.pkg.dev/$PROJECT_ID/<REPO NAME>/<IMAGE NAME>:latest'

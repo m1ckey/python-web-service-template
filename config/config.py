@@ -36,9 +36,9 @@ class Config:
             from google.cloud import secretmanager
             client = secretmanager.SecretManagerServiceClient()
 
-            name = f'projects/{self.gcp_project_id}/secrets/db-backend-password/versions/1'
+            name = f'projects/{self.gcp_project_id}/secrets/db-password/versions/latest'
             self.db_password = client.access_secret_version(name=name).payload.data.decode("UTF-8")
-            name = f'projects/{self.gcp_project_id}/secrets/server-jwt-key/versions/1'
+            name = f'projects/{self.gcp_project_id}/secrets/server-jwt-key/versions/latest'
             self.server_jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode("UTF-8"))
         else:
             self._load_yml('config/config_dev.yml')

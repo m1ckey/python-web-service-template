@@ -1,3 +1,3 @@
-from .config import Config, ConfigProfile
+from .load import load_config
 
-conf = Config()
+conf = load_config()

@@ -3,7 +3,7 @@ from typing import Optional
 
 import asyncpg
 
-from config import conf
+from config import config
 
 
 class DB:
@@ -11,11 +11,11 @@ class DB:
 
     @classmethod
     async def connect(cls):
-        cls.pool = await asyncpg.create_pool(user=conf.db_user,
-                                             password=conf.db_password,
-                                             host=conf.db_host,
-                                             port=conf.db_port,
-                                             database=conf.db_database)
+        cls.pool = await asyncpg.create_pool(user=config.db.user,
+                                             password=config.db.password,
+                                             host=config.db.host,
+                                             port=config.db.port,
+                                             database=config.db.database)
         await cls.ping()
 
     @classmethod

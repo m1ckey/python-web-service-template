@@ -7,7 +7,7 @@ from starlette.authentication import AuthenticationBackend, AuthenticationError,
 from starlette.exceptions import HTTPException
 from starlette.requests import Request
 
-from config import conf
+from config import config
 
 
 class AuthScope(Enum):
@@ -25,7 +25,7 @@ class JWTAuth(AuthenticationBackend):
                 raise ValueError()
 
             payload = jwt.decode(jwt=token,
-                                 key=conf.server_jwt_key,
+                                 key=config.server.jwt_key,
                                  algorithms='HS256')
         except (ValueError, InvalidTokenError) as e:
             raise AuthenticationError('illegal auth')

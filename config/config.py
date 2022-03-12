@@ -1,4 +1,3 @@
-import logging
 import os
 import sys
 from base64 import b64decode
@@ -16,14 +15,6 @@ class Config:
     def __init__(self):
         self.profile = ConfigProfile[os.environ.get('APP_PROFILE', ConfigProfile.DEV.name).upper()]
         print(f'starting with profile: {self.profile.name}', flush=True)
-
-        self.logger = logging.getLogger('main')
-        self.logger.setLevel(logging.DEBUG)
-
-        log_handler = logging.StreamHandler(sys.stdout)
-        log_handler.setLevel(logging.ERROR if self.profile == ConfigProfile.PROD else logging.DEBUG)
-        log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)-8s - %(message)s'))
-        self.logger.addHandler(log_handler)
 
         if self.profile == ConfigProfile.PROD:
             self._load_yml('config/config_prod.yml')
@@ -46,7 +37,7 @@ class Config:
                 self.db_password = os.environ['APP_DB_PASSWORD']
                 self.server_jwt_key = os.environ['APP_SERVER_JWT_KEY']
             except KeyError as e:
-                self.logger.critical(f'could not parse environ: {e}')
+                print(f'could not parse environ: {e}', file=sys.stderr)
                 exit(1)
 
     def _load_yml(self, path: str):
@@ -60,5 +51,5 @@ class Config:
                 self.db_user = conf['db']['user']
                 self.db_database = conf['db']['database']
             except KeyError as e:
-                self.logger.critical(f'could not parse {path}: {e}')
+                print(f'could not parse {path}: {e}', file=sys.stderr)
                 exit(1)

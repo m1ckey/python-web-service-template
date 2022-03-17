@@ -14,7 +14,7 @@ def load_config() -> Config:
     with open(path) as f:
         j = json.load(f)
         try:
-            config = Config(
+            c = Config(
                 env=env,
                 db=DBConfig(
                     host=j['db']['host'],
@@ -38,19 +38,19 @@ def load_config() -> Config:
         from google.cloud import secretmanager
         client = secretmanager.SecretManagerServiceClient()
 
-        name = f'projects/{config.gcp.project_id}/secrets/db-password/versions/latest'
-        config.db.password = client.access_secret_version(name=name).payload.data.decode("UTF-8")
-        name = f'projects/{config.gcp.project_id}/secrets/server-jwt-key/versions/latest'
-        config.server.jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode("UTF-8"))
+        name = f'projects/{c.gcp.project_id}/secrets/db-password/versions/latest'
+        c.db.password = client.access_secret_version(name=name).payload.data.decode("UTF-8")
+        name = f'projects/{c.gcp.project_id}/secrets/server-jwt-key/versions/latest'
+        c.server.jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode("UTF-8"))
     else:
         try:
-            config.db.password = os.environ['APP_DB_PASSWORD']
-            config.server.jwt_key = os.environ['APP_SERVER_JWT_KEY']
+            c.db.password = os.environ['APP_DB_PASSWORD']
+            c.server.jwt_key = os.environ['APP_SERVER_JWT_KEY']
         except KeyError as e:
             print(f'could not parse environ: {e}', file=sys.stderr)
             exit(1)
 
-    return config
+    return c
 
 
 config = load_config()

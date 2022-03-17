@@ -51,3 +51,6 @@ def load_config() -> Config:
             exit(1)
 
     return config
+
+
+config = load_config()

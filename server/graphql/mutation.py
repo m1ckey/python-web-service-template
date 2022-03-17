@@ -5,5 +5,5 @@ mutation = MutationType()
 
 
 @mutation.field('hello')
-async def hello(_, info: GraphQLResolveInfo, name: str):
+def hello(_, info: GraphQLResolveInfo, name: str):
     return f'Hello {name}'

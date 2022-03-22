@@ -1,9 +1,8 @@
 import uvicorn
 from starlette.applications import Starlette
 
-from config import config
 import db
-from config import Environment
+from config import Environment, config
 from server import routes, middleware
 
 app = Starlette(

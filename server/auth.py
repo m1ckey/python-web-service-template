@@ -24,10 +24,12 @@ class JWTAuth(AuthenticationBackend):
             if scheme.lower() != 'bearer':
                 raise ValueError()
 
-            payload = jwt.decode(jwt=token,
-                                 key=config.server.jwt_key,
-                                 algorithms='HS256')
-        except (ValueError, InvalidTokenError) as e:
+            payload = jwt.decode(
+                jwt=token,
+                key=config.server.jwt_key,
+                algorithms='HS256'
+            )
+        except (ValueError, InvalidTokenError):
             raise AuthenticationError('illegal auth')
 
         user_id = payload['sub']

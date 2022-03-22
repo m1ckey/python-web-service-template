@@ -2,7 +2,7 @@ from ariadne import make_executable_schema, load_schema_from_path
 from ariadne.asgi import GraphQL
 
 from config import config
-from model import Environment
+from config import Environment
 from .enum import enums
 from .mutation import mutation
 from .query import query

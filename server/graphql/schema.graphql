@@ -1,5 +1,6 @@
 scalar Base64
 scalar DateTime
+scalar UUID
 
 type Query {
     ping: String!

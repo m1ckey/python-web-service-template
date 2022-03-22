@@ -1,8 +1,7 @@
 import logging
 import sys
 
-from config import config
-from model import Environment
+from config import config, Environment
 
 logger = logging.getLogger('main')
 logger.setLevel(logging.DEBUG)

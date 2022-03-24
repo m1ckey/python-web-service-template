@@ -16,11 +16,11 @@ class AuthScope(Enum):
 
 class JWTAuth(AuthenticationBackend):
     async def authenticate(self, request: Request):
-        if "Authorization" not in request.headers:
+        if 'authorization' not in request.headers:
             return
 
         try:
-            scheme, token = request.headers["Authorization"].split()
+            scheme, token = request.headers['authorization'].split()
             if scheme.lower() != 'bearer':
                 raise ValueError()
 

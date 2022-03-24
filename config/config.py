@@ -73,9 +73,9 @@ def load_config() -> Config:
         client = secretmanager.SecretManagerServiceClient()
 
         name = f'projects/{c.gcp.project_id}/secrets/db-password/versions/latest'
-        c.db.password = client.access_secret_version(name=name).payload.data.decode("UTF-8")
+        c.db.password = client.access_secret_version(name=name).payload.data.decode('UTF-8')
         name = f'projects/{c.gcp.project_id}/secrets/server-jwt-key/versions/latest'
-        c.server.jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode("UTF-8"))
+        c.server.jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode('UTF-8'))
     else:
         try:
             c.db.password = os.environ['APP_DB_PASSWORD']

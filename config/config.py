@@ -72,14 +72,10 @@ def load_config() -> Config:
         from google.cloud import secretmanager
         client = secretmanager.SecretManagerServiceClient()
 
-        c.db.password = client.access_secret_version(
-            name=f'projects/{c.gcp.project_id}/secrets/db-password/versions/latest'
-        ).payload.data.decode()
-        c.server.jwt_key = b64decode(
-            client.access_secret_version(
-                name=f'projects/{c.gcp.project_id}/secrets/server-jwt-key/versions/latest'
-            ).payload.data.decode()
-        )
+        name = f'projects/{c.gcp.project_id}/secrets/db-password/versions/latest'
+        c.db.password = client.access_secret_version(name=name).payload.data.decode()
+        name = f'projects/{c.gcp.project_id}/secrets/server-jwt-key/versions/latest'
+        c.server.jwt_key = b64decode(client.access_secret_version(name=name).payload.data.decode())
     else:
         try:
             c.db.password = os.environ['APP_DB_PASSWORD']

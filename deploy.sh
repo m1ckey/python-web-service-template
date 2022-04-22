@@ -2,8 +2,6 @@
 
 set -e
 
-rm poetry.lock
-poetry install
 poetry export -o requirements.txt
 
 git switch prod

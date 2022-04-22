@@ -467,7 +467,7 @@ standard = ["websockets (>=10.0)", "httptools (>=0.4.0)", "watchgod (>=0.6)", "p
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "34a9e9a12bbae935a9c03374668637ee8c67d10d4a6310fb69e32e54fb5664ec"
+content-hash = "0b549ff303ae8569ae2facd4bcb8fccfce3540caf2338fbeeca2ddf60747fe95"
 
 [metadata.files]
 anyio = [

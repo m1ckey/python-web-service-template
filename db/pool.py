@@ -12,22 +12,24 @@ pool: Optional[Pool] = None
 
 async def connect():
     global pool
-    if pool is None:
-        pool = await asyncpg.create_pool(
-            user=config.db.user,
-            password=config.db.password,
-            host=config.db.host,
-            port=config.db.port,
-            database=config.db.database
-        )
-        await pool.fetchval("SELECT 'pong'")
+    if pool is not None:
+        return
+    pool = await asyncpg.create_pool(
+        user=config.db.user,
+        password=config.db.password,
+        host=config.db.host,
+        port=config.db.port,
+        database=config.db.database
+    )
+    await pool.fetchval("SELECT 'pong'")
 
 
 async def disconnect():
     global pool
-    if pool is not None:
-        await asyncio.wait_for(pool.close(), timeout=10)
-        pool = None
+    if pool is None:
+        return
+    await asyncio.wait_for(pool.close(), timeout=10)
+    pool = None
 
 
 def acquire_connection(f):

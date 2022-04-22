@@ -1,11 +1,11 @@
 {
-  "gcp": {
-    "project_id": null
-  },
   "db": {
     "host": null,
     "port": null,
     "user": null,
     "database": null
+  },
+  "gcp": {
+    "project_id": null
   }
 }

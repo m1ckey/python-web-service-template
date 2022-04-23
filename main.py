@@ -1,12 +1,12 @@
 import uvicorn
 from starlette.applications import Starlette
 
-from config import Environment, config
+from config import Environment, Config
 from db import DB
 from server import routes, middleware
 
 app = Starlette(
-    debug=config.env != Environment.PROD,
+    debug=Config.env != Environment.PROD,
     routes=routes,
     middleware=middleware,
     on_startup=[DB.connect],

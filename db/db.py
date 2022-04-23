@@ -3,7 +3,7 @@ from typing import Optional
 
 import asyncpg
 
-from config import config
+from config import Config
 from .handler import ping
 
 
@@ -15,11 +15,11 @@ class DB:
         if cls.pool is not None:
             return
         cls.pool = await asyncpg.create_pool(
-            user=config.db.user,
-            password=config.db.password,
-            host=config.db.host,
-            port=config.db.port,
-            database=config.db.database
+            user=Config.db.user,
+            password=Config.db.password,
+            host=Config.db.host,
+            port=Config.db.port,
+            database=Config.db.database
         )
         await cls.ping()
 

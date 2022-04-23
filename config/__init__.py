@@ -1,1 +1,1 @@
-from .config import Environment, Config, config
+from .config import Environment, Config

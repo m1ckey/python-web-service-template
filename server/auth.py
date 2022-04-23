@@ -11,7 +11,7 @@ from config import Config
 
 
 class AuthScope(Enum):
-    ADMIN = 1
+    ADMIN = 'ADMIN'
 
 
 class JWTAuth(AuthenticationBackend):

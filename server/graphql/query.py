@@ -1,11 +1,11 @@
 from ariadne import QueryType
 from graphql import GraphQLResolveInfo
 
-import db
+from db import DB
 
 query = QueryType()
 
 
 @query.field('ping')
 async def ping(_, info: GraphQLResolveInfo):
-    return await db.ping()
+    return await DB.ping()

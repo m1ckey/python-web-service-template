@@ -1,16 +1,16 @@
 import uvicorn
 from starlette.applications import Starlette
 
-import db
-import server
 from config import Environment, config
+from db import DB
+from server import routes, middleware
 
 app = Starlette(
     debug=config.env != Environment.PROD,
-    routes=server.routes,
-    middleware=server.middleware,
-    on_startup=[db.connect],
-    on_shutdown=[db.disconnect]
+    routes=routes,
+    middleware=middleware,
+    on_startup=[DB.connect],
+    on_shutdown=[DB.disconnect]
 )
 
 if __name__ == '__main__':

@@ -1,8 +1,8 @@
 from starlette.requests import Request
 from starlette.responses import PlainTextResponse
 
-import db
+from db import DB
 
 
 async def ping(request: Request):
-    return PlainTextResponse(await db.ping())
+    return PlainTextResponse(await DB.ping())

@@ -4,7 +4,7 @@ from typing import Optional
 import asyncpg
 
 from config import Config
-from .handler import ping
+from .ping import handle_ping
 
 
 class DB:
@@ -33,4 +33,4 @@ class DB:
     @classmethod
     async def ping(cls) -> str:
         async with cls.pool.acquire() as con:
-            return await ping.handle_ping(con)
+            return await handle_ping(con)

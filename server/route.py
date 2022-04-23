@@ -1,7 +1,7 @@
 from starlette.routing import Route, Mount
 
 from .graphql import app
-from .handler.ping import ping
+from .ping import ping
 
 routes = [
     Mount('/api', routes=[

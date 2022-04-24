@@ -29,6 +29,7 @@ class GCPConfig:
 
 @dataclass
 class ServerConfig:
+    port: int
     jwt_key: bytes
 
 
@@ -58,6 +59,7 @@ class Config:
                     project_id=j['gcp']['project_id']
                 )
                 cls.server = ServerConfig(
+                    port=j['server']['port'],
                     jwt_key=b''
                 )
             except KeyError as e:
